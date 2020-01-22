@@ -1,0 +1,11 @@
+{
+  "name": "sekoia-webapi",
+  "version": "1.0.0",
+  "description": "Sekoia Time Attendance Odoo bridge",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npx jest "
+  },
+  "author": "",
+  "license": "MIT"
+}
