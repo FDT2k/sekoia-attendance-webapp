@@ -1,4 +1,14 @@
-let Odoo = require('odoo-api');
+const express = require('express');
+const app = express();
+const Router = express.Router();
+const jwt = require('jsonwebtoken');
+const uuid = require('uuid/v4')
+const jwt_secret = uuid();
+var bodyParser = require('body-parser')
+
+
+let sessions = {}
+
 
 let config ={
   host: process.env.ODOO_SERVER,
@@ -9,18 +19,47 @@ let config ={
 }
 
 
-let odoo = new Odoo({host:config.host,port:config.port});
+const authenticateMW = (req,res,next)=>{
+  const tok = req.headers['x-api-auth'];
+  //console.log(tok)
+  try {
+    if(jwt.verify(tok,jwt_secret)){
+      if(sessions[tok]){
+        req.creds = sessions[tok]
+        return next();
+      }else{
+        throw new Error('Session not found')
+      }
+    }
+  }catch(err){
+    res.status(401).send(err)
+  }
 
-odoo.connect({
-  database:config.database,username:config.username,password:config.password
-}).then((client)=>{
-  console.log('coucou')
+  res.status(401).send('authorization failed')
+}
 
-  return client.searchRead('hr.employee',[])
-}).then(res=>{
-  console.log('result',res)
-}).catch(err=>{
-  console.error(err)
-});
 
-console.log('starting')
+Router.post('/authenticate',(req,res)=>{
+  let token =jwt.sign({ foo: 'bar' }, jwt_secret);
+
+  sessions[token] = req.body;
+
+
+  res.send({token})
+})
+
+
+
+Router.get('/',authenticateMW,(req,res)=>{
+
+  res.send(req.creds);
+})
+
+
+
+
+app.use(bodyParser.json())
+
+app.use(Router)
+
+app.listen(process.env.LISTEN_PORT || 3000);
