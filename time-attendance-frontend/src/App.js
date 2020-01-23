@@ -1,13 +1,15 @@
 import React from 'react';
 import Header from './components/Header';
+import UsersGrid from './components/UsersGrid';
 import './App.css';
+
+const users = [{ name: 'Quentin' }, { name: 'Bob' }];
 
 function App() {
   return (
     <div className="App">
-
       <Header />
-      {/* <UserGrid users={users} /> */}
+      <UsersGrid users={users} />
     </div>
   );
 }
