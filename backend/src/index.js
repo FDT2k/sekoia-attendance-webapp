@@ -4,58 +4,90 @@ const Router = express.Router();
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid/v4')
 const jwt_secret = uuid();
-var bodyParser = require('body-parser')
-
+const bodyParser = require('body-parser')
+const { validate } = require ('parameter-validator');
+const _ = require('lodash')
+const { ODOO } = require('./odoo')
 
 let sessions = {}
 
-
-let config ={
-  host: process.env.ODOO_SERVER,
-  port: process.env.ODOO_PORT || 8069,
-  database: process.env.ODOO_DB || 'Sekoia4',
-  username: process.env.ODOO_USER,
-  password: process.env.ODOO_PW
+const reply_error = (res,error,http=500) =>{
+    res.status(http).send({success:false,error:error.message,error_code:error.code})
 }
 
+const handle_express_error = error =>{
+  console.error(error)
+  reply_error(res,error)
+}
 
 const authenticateMW = (req,res,next)=>{
+  //récupérer le token
   const tok = req.headers['x-api-auth'];
-  //console.log(tok)
   try {
     if(jwt.verify(tok,jwt_secret)){
       if(sessions[tok]){
-        req.creds = sessions[tok]
+        // on initialize la factory avec le contenu de la session
+        console.log(ODOO(sessions[tok]))
+        req.odoo = ODOO(sessions[tok])
         return next();
       }else{
         throw new Error('Session not found')
       }
     }
   }catch(err){
-    res.status(401).send(err)
-  }
+    reply_error(res,err,401)
 
-  res.status(401).send('authorization failed')
+  }
 }
+
+
+const normalize_employee = employee => _.pick(employee,['name','id','image_small'])
 
 
 Router.post('/authenticate',(req,res)=>{
   let token =jwt.sign({ foo: 'bar' }, jwt_secret);
-
-  sessions[token] = req.body;
-
-
-  res.send({token})
+  try {
+    const {host,port,database,user,password } = validate(req.body,['host','port','database','username','password'])
+    sessions[token] = req.body;
+    res.send({token})
+  }catch(error){
+    reply_error(res,error)
+  }
 })
 
 
 
-Router.get('/',authenticateMW,(req,res)=>{
-
-  res.send(req.creds);
+Router.get('/users',authenticateMW,(req,res)=>{
+  req.odoo.get_users()
+  .then(result => {
+    res.send(result.map(normalize_employee))
+  })
+  .catch(handle_express_error)
 })
 
+Router.get('/users/:id',authenticateMW,(req,res)=>{
+  req.odoo.get_presences(req.params.id)
+  .then(result => {
+    res.send(result)
+  })
+  .catch(error=>{
+    console.error(error)
+    reply_error(res,error)
+  })
+})
 
+Router.post('/users/:id',authenticateMW,(req,res)=>{
+  ODOO(req.creds).then(client=>{
+
+
+  }).then(result => {
+    res.send(result)
+  }).catch(error=>{
+    console.error(error)
+    reply_error(res,error)
+  })
+
+})
 
 
 app.use(bodyParser.json())

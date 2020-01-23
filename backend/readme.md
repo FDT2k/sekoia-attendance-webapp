@@ -17,7 +17,7 @@ Passerelle rest pour le plugins "présence" de Odoo.
     	  port: 8069, // server port (http endpoint)
     	  database: "TestDB", //String: the database to use. Case sensitive
     	  username: "blabla", //the username to use (must have access to the plugin
-		  password: "blabla"
+		    password: "blabla"
       }
 
 #### response
@@ -28,4 +28,10 @@ Passerelle rest pour le plugins "présence" de Odoo.
 le token doit être transmis à chaque requête dans le header x-api-auth
 
 
-### [GET] / 
+### [GET] /users
+
+
+### [GET] /users/:id
+
+
+### [PUT] /users/:id
