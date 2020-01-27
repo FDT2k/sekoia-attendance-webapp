@@ -31,7 +31,43 @@ le token doit être transmis à chaque requête dans le header x-api-auth
 ### [GET] /users
 
 
-### [GET] /users/:id
+### [GET] /attendance/:user_id
 
 
-### [PUT] /users/:id
+### [POST] /toggle/:user_id
+
+#### request
+    {
+      "pin":"xxxx"
+    }
+
+#### response
+
+    {
+      "success": true || false
+    }
+
+### [POST] /attendance/:user_id/check_in
+
+#### response
+
+    {
+      "success": true || false
+    }
+
+#### request
+    {
+      "pin":"xxxx"
+    }
+
+### [POST] /attendance/:user_id/check_out
+
+#### request
+    {
+      "pin":"xxxx"
+    }
+
+#### response
+    {
+      "success": true || false
+    }
