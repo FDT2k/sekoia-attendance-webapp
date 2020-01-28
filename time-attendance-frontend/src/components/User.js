@@ -1,13 +1,14 @@
-import React from 'react'
-import './User.css'
+import React from 'react';
+import './User.css';
 
-// export default function User({ name, status = false, picture }) {
-export default function User({ user }) {
+export default function User(props) {
+    const { firstname, lastname, picture, present } = props.user;
+
     return (
-        <div className="user">
-            <img src={user.picture} alt="Photo" />
-            <p>{user.name}</p>
-            <p>{user.status ? 'Présent' : 'Absent'}</p>
+        <div className="user" onClick={props.onClick}>
+            <img src={picture} alt="Profil" />
+            <p>{firstname} {lastname}</p>
+            <p>{present ? 'Présent' : 'Absent'}</p>
         </div>
     )
 }
