@@ -1,6 +1,6 @@
-import React from 'react';
 import { Modal } from 'antd';
-import PinInput from './PinInput';
+import React from 'react';
+import PinPad from './PinPad';
 
 export default function PresenceUpdateModal(props) {
 
@@ -21,7 +21,7 @@ export default function PresenceUpdateModal(props) {
             maskClosable={false}
             footer={null}
         >
-            <PinInput />
+            <PinPad />
         </Modal>
     )
 }

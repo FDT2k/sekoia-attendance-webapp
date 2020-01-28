@@ -1,39 +1,25 @@
-import { Input } from 'antd';
-import React, { Component, Fragment } from 'react';
-import KeyPad from './KeyPad';
+import { Icon } from 'antd';
+import React from 'react';
+import { ReactComponent as CircleSvg } from '../circle.svg';
+import './PinInput.css';
 
-export default class PinInput extends Component {
+export default function PinInput(props) {
 
-    state = {
-        value: ""
+    const PinIcon = (props) => <Icon component={CircleSvg} {...props} />;
+
+    const { max = 4, actives } = props;
+
+    const icons = [];
+    for (let i = 0; i < max; i++) {
+        icons.push(<PinIcon key={i} className={i < actives ? "active" : ""} />);
     }
 
-    handleClick = (key) => {
-        console.log("key tapée : " + key)
-    
-        const oldValue = this.state.value;
-        const newValue = key === "C" ? oldValue.slice(0, -1) : oldValue + key;
+    // Fait la même chose en une ligne, mais c'est moins compréhensible
+    // const icons = [...Array(max)].map((x, i) => <PinIcon key={i} className={i < actives ? "active" : ""} />);
 
-        this.setState({
-            value: newValue
-        });
-    }
-
-    render() {
-        return (
-            <Fragment>
-                <Input.Password // TODO provisoire, remplacé avec des icones jusqu'à 4 max
-                    style={{
-                        margin: 'auto',
-                        // width: '15px'
-                    }}
-                    size="large"
-                    disabled={true}
-                    visibilityToggle={false}
-                    value={this.state.value} />
-
-                <KeyPad handleClick={this.handleClick} />
-            </Fragment>
-        )
-    }
+    return (
+        <div className="pin-input-icons">
+            {icons}
+        </div>
+    )
 }
