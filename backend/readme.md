@@ -5,6 +5,27 @@
 Passerelle rest pour le plugins "présence" de Odoo.
 
 
+## Résumé
+
+### prérequis
+  Nodejs >= 10.x
+
+### dépendances
+
+  https://github.com/FDT2k/odoo-api
+
+
+### install
+
+    git clone https://github.com/FDT2k/sekoia-attendance-webapp
+
+    cd sekoia-attendance-webapp/backend
+
+    npm install
+
+    npm start
+
+
 ## API
 
 
@@ -25,16 +46,18 @@ Passerelle rest pour le plugins "présence" de Odoo.
 
     {token:"<YOURTOKEN>"}
 
-le token doit être transmis à chaque requête dans le header x-api-auth
+le token doit être transmis à chaque requête dans le header **x-api-auth** (sauf pour authenticate )
 
 
 ### [GET] /users
-
+ récupère la liste des utilisateurs
 
 ### [GET] /attendance/:user_id
-
+Recupère la liste des présences pour un user
 
 ### [POST] /toggle/:user_id
+
+Bascule la présence d'un utilisateur
 
 #### request
     {
