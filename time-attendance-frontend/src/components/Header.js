@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import './Header.css'
+import { PageHeader } from 'antd';
+import Clock from './Clock';
+import './Header.css';
 
 export class Header extends Component {
     render() {
         return (
-            <div className="header">
-                
-            </div>
+            <PageHeader
+                style={{
+                    border: '1px solid rgb(235, 237, 240)',
+                }}
+                title="Sekoia"
+                subTitle="Pointage pour la présence"
+                extra={[
+                    // <Button key="showPresents">Afficher les présents</Button>,
+                    <Clock key="clock" />
+                ]}
+            />
         )
     }
 }
