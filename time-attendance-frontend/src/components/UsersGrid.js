@@ -6,31 +6,33 @@ import './UsersGrid.css';
 
 export default class UsersGrid extends Component {
 
-  state = { visible: false, user: null };
+  state = { isModalVisible: false, selectedUser: null };
 
   showModal = user => {
     this.setState({
-      user: user,
-      visible: true,
+      selectedUser: user,
+      isModalVisible: true,
     });
   };
 
   handleClose = e => {
     this.setState({
-      visible: false,
+      isModalVisible: false,
     });
   };
 
   render() {
+    const {isModalVisible,selectedUser} = this.state;
+    const {users} = this.props;
     return (
       <Fragment>
         <PresenceWindow
-          visible={this.state.visible}
+          visible={isModalVisible}
           handleClose={this.handleClose}
-          user={this.state.user}
+          user={selectedUser}
         />
         <Row type="flex">
-          {this.props.users.map(user => (
+          {users.map(user => (
             <Col key={user.id} >
               <User user={user} onClick={() => this.showModal(user)} />
             </Col>
