@@ -1,6 +1,6 @@
 import { Icon } from 'antd';
 import React from 'react';
-import { ReactComponent as CircleSvg } from '../circle.svg';
+import { ReactComponent as CircleSvg } from '../resources/circle.svg';
 import './PinInput.css';
 
 export default function PinInput(props) {
