@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import KeyPad from './KeyPad';
 import PinInput from './PinInput';
 
@@ -22,10 +22,15 @@ export default class PinPad extends Component {
 
     render() {
         return (
-            <Fragment>
+            <div 
+                style={{
+                    width: "fit-content",
+                    margin: "auto"
+                }}
+            >
                 <PinInput max={4} actives={this.state.value.length} />
                 <KeyPad handleClick={this.handleClick} />
-            </Fragment>
+            </div>
         )
     }
 }

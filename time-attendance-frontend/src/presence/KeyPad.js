@@ -1,5 +1,6 @@
-import React from 'react';
 import { Button, Col, Row } from 'antd';
+import React from 'react';
+import './KeyPad.css';
 
 export default function KeyPad(props) {
 
@@ -11,19 +12,14 @@ export default function KeyPad(props) {
 
     const createButton = (val) => (
         <Col key={val} span={8}>
-            <Button onClick={() => props.handleClick(val)}>
+            <Button onClick={() => props.handleClick(val)} size="large">
                 {val}
             </Button>
         </Col>
     )
 
     return (
-        <div style={{
-            border: '1px solid black',
-            width: 'fit-content',
-            margin: 'auto',
-            padding: '5px'
-        }}>
+        <div className="key-pad">
             {createLine(1, 2, 3)}
             {createLine(4, 5, 6)}
             {createLine(7, 8, 9)}

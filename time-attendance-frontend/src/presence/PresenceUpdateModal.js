@@ -1,6 +1,7 @@
 import { Modal } from 'antd';
 import React from 'react';
 import PinPad from './PinPad';
+import './PresenceUpdateModal.css';
 
 export default function PresenceUpdateModal(props) {
 
@@ -10,7 +11,11 @@ export default function PresenceUpdateModal(props) {
         return null;
     }
 
-    const title = `Bienvenue ${user.firstname} ${user.lastname}`;
+
+    // TODO afficher l'avatar
+    const { id, firstname, lastname, picture, present } = user;
+
+    const title = `Bienvenue ${firstname} ${lastname}`;
 
     return (
         <Modal
@@ -20,7 +25,12 @@ export default function PresenceUpdateModal(props) {
             mask={false}
             maskClosable={false}
             footer={null}
+            width="fit-content"
+            className="presence-update-modal"
         >
+            <p>
+                Saisissez votre code PIN pour pointer à {present ? 'la' : "l'"}{<b>{present ? 'SORTIE' : 'ENTRÉE'}</b>}
+            </p>
             <PinPad />
         </Modal>
     )
