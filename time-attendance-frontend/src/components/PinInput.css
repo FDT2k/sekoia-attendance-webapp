@@ -1,0 +1,13 @@
+.pin-input-icons {
+    text-align: center;
+    padding: 10px;
+}
+
+.pin-input-icons > i {
+    font-size: 30px;
+    margin: 10px;
+}
+
+.pin-input-icons > i.active {
+    font-size: 50px;
+}
