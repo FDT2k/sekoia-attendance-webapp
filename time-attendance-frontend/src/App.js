@@ -1,8 +1,8 @@
 import { Layout } from 'antd';
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import UsersGrid from './components/UsersGrid';
+import Header from './main/Header';
+import UsersGrid from './main/UsersGrid';
 
 const users = [
   { id: 0, firstname: 'Quentin', lastname: 'Queloz', picture: "", present: false },
