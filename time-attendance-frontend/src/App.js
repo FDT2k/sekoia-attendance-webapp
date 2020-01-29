@@ -8,6 +8,7 @@ import { Route } from "wouter"; // routeur
 import {Provider} from 'react-redux'
 import store from './redux'
 
+import {check_token,load_stored_config} from './redux/Auth/actions'
 const users = [
   { id: 0, firstname: 'Quentin', lastname: 'Queloz', picture: "", present: false },
   { id: 1, firstname: 'Quentin', lastname: 'Queloz', picture: "", present: false },
@@ -24,6 +25,15 @@ const users = [
   { id: 12, firstname: 'Quentin', lastname: 'Queloz', picture: "", present: false },
   { id: 13, firstname: 'Quentin', lastname: 'Queloz', picture: "", present: false },
 ];
+
+
+// initialize some stuff in the store
+store.dispatch(load_stored_config())
+const tok = localStorage.getItem('token')
+if( tok !== undefined && tok !==null){
+  store.dispatch(check_token(tok))
+}
+
 
 function App() {
   return (

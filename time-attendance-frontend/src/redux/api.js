@@ -7,6 +7,7 @@ import _axios from 'axios';
 
 
 export const _authenticate =  axios  => payload =>  axios.post('/authenticate',payload)
+export const _authenticated=  axios  => _ =>  axios.get('/authenticate',{})
 
 export const _get_users =  axios  => () =>  axios.get('/users',{})
 
@@ -26,7 +27,8 @@ export const makeAPI = (url,token) => {
     authenticate: _authenticate(instance),
     get_users: _get_users(instance),
     get_attendance: _get_attendance(instance),
-    toggle: _toggle(instance)
+    toggle: _toggle(instance),
+    authenticated:_authenticated(instance)
   }
 
 }

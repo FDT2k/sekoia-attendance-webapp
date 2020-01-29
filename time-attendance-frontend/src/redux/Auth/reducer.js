@@ -1,10 +1,16 @@
 
-import {AUTHENTICATE} from './actions'
+import {AUTHENTICATED,AUTHENTICATE_FAILURE,CONFIG} from './actions'
 
 
 export default (state={},action)=>{
-  console.log(action);
-
-
-  return state;
+  switch(action.type){
+    case AUTHENTICATED:
+      return {...state, token: action.payload, authenticated:true}
+    case AUTHENTICATE_FAILURE:
+      return {...state, authenticated:false, error:action.payload};
+    case CONFIG:
+      return {...state, config:action.payload}
+    default:
+      return state;
+  }
 }

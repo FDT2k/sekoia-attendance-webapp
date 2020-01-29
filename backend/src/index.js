@@ -1,17 +1,21 @@
-const express = require('express');
-const app = express();
-const Router = express.Router();
-const jwt = require('jsonwebtoken');
-const uuid = require('uuid/v4')
-const jwt_secret = uuid();
-const bodyParser = require('body-parser')
-const { validate } = require ('parameter-validator');
-const _ = require('lodash')
-var cors = require('cors')
-const {serializeError, deserializeError} = require('serialize-error');
-const { ODOO } = require('./odoo')
+const express                 = require('express');
+const jwt                     = require('jsonwebtoken');
+const uuid                    = require('uuid/v4')
+const bodyParser              = require('body-parser')
+const { validate }            = require ('parameter-validator');
+const _                       = require('lodash')
+const cors                    = require('cors')
+const {serializeError}        = require('serialize-error');
+const { ODOO }                = require('./odoo')
+const {APIError}              = require('./error')
 
-const {APIError} = require('./error')
+
+
+
+const app          = express();
+const Router       = express.Router();
+const jwt_secret   = uuid();
+
 
 let sessions = {}
 
@@ -69,6 +73,15 @@ Router.post('/authenticate',(req,{reply,reply_error})=>{
   try {
     const {host,port,database,user,password } = validate(req.body,['host','port','database','username','password'])
     sessions[token] = req.body;
+    reply({token})
+  }catch(error){
+    reply_error(error)
+  }
+})
+
+Router.get('/authenticate',authenticateMW,(req,{reply,reply_error})=>{
+  let token =jwt.sign({ foo: 'bar' }, jwt_secret);
+  try {
     reply({token})
   }catch(error){
     reply_error(error)

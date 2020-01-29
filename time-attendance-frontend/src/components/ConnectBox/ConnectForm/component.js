@@ -5,7 +5,7 @@ import { Row,Col } from 'antd';
 
 
 
-const makeField = formik => (key,type,bind,label) => {
+const makeField = formik => (key,type="text",bind,label) => {
 
   const _bound =  bind ? bind: key;
   const _label = label ? label: key;
@@ -20,6 +20,7 @@ const makeField = formik => (key,type,bind,label) => {
               name={key}
               onChange={formik.handleChange}
               value={formik.values[_bound]}
+              type={type}
             />
           </Col>
         </Row>
@@ -32,6 +33,7 @@ const ConnectForm = ({initialValues,handleSubmit}) => {
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
+    enableReinitialize:true
   });
 
   const createField = makeField(formik)
@@ -39,7 +41,7 @@ const ConnectForm = ({initialValues,handleSubmit}) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       {
-        Object.keys(initialValues).map(item=> createField(item))
+        Object.keys(initialValues).map(item=> createField(item,item === 'password' ? 'password': 'text'))
       }
       <button type="submit">Submit</button>
     </form>
