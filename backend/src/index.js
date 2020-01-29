@@ -7,13 +7,13 @@ const jwt_secret = uuid();
 const bodyParser = require('body-parser')
 const { validate } = require ('parameter-validator');
 const _ = require('lodash')
+var cors = require('cors')
 const {serializeError, deserializeError} = require('serialize-error');
 const { ODOO } = require('./odoo')
 
 const {APIError} = require('./error')
 
 let sessions = {}
-
 
 const format_error = error => {
   const _err = serializeError(error)
@@ -132,6 +132,7 @@ Router.post('/atttendances/:user_id/check_out',authenticateMW,(req,{reply,reply_
   .catch(reply_error)
 })
 
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bindReplyAndError);
