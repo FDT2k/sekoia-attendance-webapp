@@ -6,8 +6,7 @@ import './UsersGrid.css';
 
 export default class UsersGrid extends Component {
 
-  // state = { isModalVisible: false, selectedUser: null };
-  state = { isModalVisible: true, selectedUser: this.props.users[0] };
+  state = { isModalVisible: false, selectedUser: null };
 
   showModal = user => {
     this.setState({
