@@ -39,17 +39,19 @@ export default (Composed,_defaultProps={}) =>{
     }
 
     handleSubmit(values){
-      console.log(values)
       this.props.authenticate(values).then(
         result=>{
           localStorage.setItem('config',JSON.stringify(_.omit(values,['password'])))
           localStorage.setItem('token',result.token)
           this.props.load_stored_config();
+
+          window.location.href='/app'
         }
       );
     }
 
     render(){
+
       return (
         <React.Fragment>
           { this.state.loading && "Loading"}
