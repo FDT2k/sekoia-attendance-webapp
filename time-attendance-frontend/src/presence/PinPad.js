@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import KeyPad from './KeyPad';
-import PinInput from './PinInput';
+import PinDisplay from './PinDisplay';
 
 export default function PinPad(props) {
 
@@ -17,7 +17,7 @@ export default function PinPad(props) {
                 margin: "auto"
             }}
         >
-            <PinInput max={pinSize} actives={pin.length} />
+            <PinDisplay max={pinSize} actives={pin.length} />
             <KeyPad handleClick={handleClick} />
         </div>
     )
