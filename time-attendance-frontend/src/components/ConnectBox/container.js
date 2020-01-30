@@ -45,7 +45,7 @@ export default (Composed,_defaultProps={}) =>{
           localStorage.setItem('token',result.token)
           this.props.load_stored_config();
 
-          window.location.href='/app'
+      //    window.location.href='/app'
         }
       );
     }

@@ -51,6 +51,7 @@ const authenticateMW = (req,{reply_error},next)=>{
       if(sessions[tok]){
         // on initialize la factory avec le contenu de la session
         req.odoo = ODOO(sessions[tok])
+        req.token = tok;
         return next();
       }else{
         throw new APIError('Session not found')
@@ -82,7 +83,7 @@ Router.post('/authenticate',(req,{reply,reply_error})=>{
 Router.get('/authenticate',authenticateMW,(req,{reply,reply_error})=>{
   let token =jwt.sign({ foo: 'bar' }, jwt_secret);
   try {
-    reply({token})
+    reply({token:req.token})
   }catch(error){
     reply_error(error)
   }

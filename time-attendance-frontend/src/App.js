@@ -1,8 +1,8 @@
 import { Layout } from 'antd';
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import UsersGrid from './components/UsersGrid';
+import Header from './main/Header';
+import UsersGrid from './main/UsersGrid';
 import ConnectBox from './components/ConnectBox';
 import { Route } from "wouter"; // routeur
 import {Provider} from 'react-redux'

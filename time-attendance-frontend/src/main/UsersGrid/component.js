@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Col, Row } from 'antd';
-import PresenceWindow from '../PresenceWindow';
+import PresenceWindow from '../../presence/PresenceWindow';
 import User from '../User';
 import './style.css';
 
