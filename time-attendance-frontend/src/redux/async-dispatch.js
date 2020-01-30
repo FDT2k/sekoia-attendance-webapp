@@ -12,15 +12,14 @@ Reject & ResolveAction creator are the local sync action to dispatch after the p
 
 
 
-export const makePromiseDispatch = payloadResolver=>   RejectActionCreator => ResolveActionCreator =>  (promise,meta={}) =>{
+export const makePromiseDispatch = payloadResolver=> errorPayloadResolver =>  RejectActionCreator => ResolveActionCreator =>  (promise,meta={}) =>{
   return async (dispatch,getState)=>{
     try{
-      let result = await promise;
-      let payload = payloadResolver(result)
+      let payload = await promise.then(payloadResolver).catch(errorPayloadResolver);
+//      let payload = payloadResolver(result)
       dispatch(ResolveActionCreator(payload,meta));
       return Promise.resolve(payload)
     }catch (error){
-      console.log(error)
       dispatch(RejectActionCreator(error,meta))
       return Promise.reject(error)
     }
@@ -28,7 +27,13 @@ export const makePromiseDispatch = payloadResolver=>   RejectActionCreator => Re
 }
 
 
-export const axiosPayloadResolver = payload => payload.data
+export const axiosPayloadResolver = payload => {
+  return payload.data
+}
+
+export const axiosErrorPayloadResolver = (payload) => {
+  return Promise.reject(payload.response.data)
+}
 
 
-export default makePromiseDispatch(axiosPayloadResolver);
+export default makePromiseDispatch(axiosPayloadResolver)(axiosErrorPayloadResolver);

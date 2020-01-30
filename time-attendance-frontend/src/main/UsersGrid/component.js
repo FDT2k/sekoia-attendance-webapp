@@ -23,7 +23,7 @@ export default class UsersGrid extends Component {
 
   render() {
     const {isModalVisible,selectedUser} = this.state;
-    const {users} = this.props;
+    const {users} = this.props ;
     return (
       <Fragment>
         <PresenceWindow
@@ -32,7 +32,7 @@ export default class UsersGrid extends Component {
           user={selectedUser}
         />
         <Row type="flex">
-          {users.map(user => (
+          {users && users.length >0 && users.map(user => (
             <Col key={user.id} >
               <User user={user} onClick={() => this.showModal(user)} />
             </Col>

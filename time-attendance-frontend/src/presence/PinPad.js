@@ -4,11 +4,18 @@ import PinDisplay from './PinDisplay';
 
 export default function PinPad(props) {
 
-    const { pinSize = 4 } = props;
+    const {error, pinSize = 4, callback } = props;
 
     const [pin, setPin] = useState('');
 
-    const handleClick = (key) => setPin(key === "C" ? pin.slice(0, -1) : pin + key);
+    const handleClick = (key) =>{
+
+      if( pin.length < pinSize || key === 'C') {
+        const _pin = key === "C" ? pin.slice(0, -1) : pin + key
+        setPin(_pin);
+        (callback && _pin.length === pinSize) && callback(_pin, () => setPin('') )
+      }
+    }
 
     return (
         <div
@@ -17,6 +24,8 @@ export default function PinPad(props) {
                 margin: "auto"
             }}
         >
+
+            {error  && <h1>{error}</h1>}
             <PinDisplay max={pinSize} actives={pin.length} />
             <KeyPad handleClick={handleClick} />
         </div>
