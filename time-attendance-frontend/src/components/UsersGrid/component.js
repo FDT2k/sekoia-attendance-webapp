@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Col, Row } from 'antd';
-import PresenceWindow from './PresenceWindow';
-import User from './User';
-import './UsersGrid.css';
+import PresenceWindow from '../PresenceWindow';
+import User from '../User';
+import './style.css';
 
 export default class UsersGrid extends Component {
 

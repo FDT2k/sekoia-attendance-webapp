@@ -23,9 +23,14 @@ export const authenticate = (payload)=> {
 }
 
 
-export const check_token = (token)=>{
+export const check_token = ()=>{
     return async (dispatch,getState)=>{
-      return dispatch(resolveAsyncAuthAction( makeAPI(getState().auth.config.api_url,token).authenticated() ))
+      const token = localStorage.getItem('token');
+      if(token){
+        return dispatch(resolveAsyncAuthAction( makeAPI(getState().auth.config.api_url,token).authenticated() ))
+      }else{
+        dispatch(authenticate_failure(new Error('no token found')))
+      }
     }
 
 }
