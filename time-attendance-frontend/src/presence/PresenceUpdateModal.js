@@ -31,7 +31,7 @@ export default function PresenceUpdateModal(props) {
             <p>
                 Saisissez votre code PIN pour pointer à {present ? 'la' : "l'"}{<b>{present ? 'SORTIE' : 'ENTRÉE'}</b>}
             </p>
-            <PinPad />
+            <PinPad pinSize={4} />
         </Modal>
     )
 }

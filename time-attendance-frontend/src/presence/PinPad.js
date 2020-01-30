@@ -1,36 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import KeyPad from './KeyPad';
 import PinInput from './PinInput';
 
-export default class PinPad extends Component {
+export default function PinPad(props) {
 
-    state = {
-        value: ""
-    }
+    const { pinSize = 4 } = props;
 
-    handleClick = (key) => {
-        // TODO : gérer le maximum et la soumission lorsqu'atteint
-        console.log("key tapée : " + key)
+    const [pin, setPin] = useState('');
 
-        const oldValue = this.state.value;
-        const newValue = key === "C" ? oldValue.slice(0, -1) : oldValue + key;
+    const handleClick = (key) => setPin(key === "C" ? pin.slice(0, -1) : pin + key);
 
-        this.setState({
-            value: newValue
-        });
-    }
-
-    render() {
-        return (
-            <div 
-                style={{
-                    width: "fit-content",
-                    margin: "auto"
-                }}
-            >
-                <PinInput max={4} actives={this.state.value.length} />
-                <KeyPad handleClick={this.handleClick} />
-            </div>
-        )
-    }
+    return (
+        <div
+            style={{
+                width: "fit-content",
+                margin: "auto"
+            }}
+        >
+            <PinInput max={pinSize} actives={pin.length} />
+            <KeyPad handleClick={handleClick} />
+        </div>
+    )
 }
