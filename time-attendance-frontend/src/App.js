@@ -13,10 +13,7 @@ import {check_token,load_stored_config} from './redux/Auth/actions'
 
 // initialize some stuff in the store
 store.dispatch(load_stored_config())
-//const tok = localStorage.getItem('token')
-//if( tok !== undefined && tok !==null){
   store.dispatch(check_token())
-//}
 
 
 function App() {
