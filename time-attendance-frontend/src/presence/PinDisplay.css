@@ -1,10 +1,10 @@
-.pin-input {
+.pin-display {
     display: flex;
     height: 80px;
     fill: rgba(0, 0, 0, 0.65);
 }
 
-.pin-input .pin-icon {
+.pin-display .pin-icon {
     flex-grow: 1;
     flex-basis: 0;
     display: flex;
@@ -12,6 +12,6 @@
     font-size: 5px;
 }
 
-.pin-input .active {
+.pin-display .active {
     font-size: 26px;
 }
