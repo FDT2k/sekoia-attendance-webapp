@@ -1,9 +1,41 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Col, Row } from 'antd';
 import PresenceWindow from '../../presence/PresenceWindow';
 import User from '../User';
 import './style.css';
 
+
+export default ({users}) => {
+
+  const [ isModalVisible, setModalVisible ] = useState(false)
+  const [ selectedUser, selectUser ] = useState(null)
+
+  const handleClose = e => setModalVisible(false)
+
+  const showModal = user => {
+    selectUser(user);
+    setModalVisible(true);
+  }
+
+  return (
+    <Fragment>
+      <PresenceWindow
+        visible={isModalVisible}
+        handleClose={handleClose}
+        user={selectedUser}
+      />
+      <Row type="flex">
+        {users && users.length >0 && users.map(user => (
+          <Col key={user.id} >
+            <User user={user} onClick={() => showModal(user)} />
+          </Col>
+        ))}
+      </Row>
+    </Fragment>
+  )
+
+}
+/*
 export default class UsersGrid extends Component {
 
   state = { isModalVisible: false, selectedUser: null };
@@ -42,3 +74,4 @@ export default class UsersGrid extends Component {
     )
   }
 }
+*/

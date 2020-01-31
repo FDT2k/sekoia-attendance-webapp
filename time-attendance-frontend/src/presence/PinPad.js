@@ -22,7 +22,7 @@ export default function PinPad(props) {
 
     // use the pinHook.
     const { pin,  error,  reset,  handleTypeKey} = usePin(user.id,pinSize,'', pinEnteredHandler)
-
+    
 
 
     return (

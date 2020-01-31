@@ -27,22 +27,24 @@ export default (Composed) =>{
 
   return (props)=> {
 
-    const {authenticate,load_stored_config} = props;
+    const {authenticate,load_stored_config,check_token} = props;
 
 
-    const [formValues, setFormValues]         = useState(defaultFormValues);
+    const [formValues, setFormValues]         = useState({});
     const [isLoading,setLoading]              = useState(false);
     const [isAuthenticated,setAuthenticated]  = useState(false);
     const [error, setError]                   = useState(null);
 
     useEffect(()=>{
-      if (!formValues){
+      if (Object.keys(formValues).length===0){
         let values = getConfig();
         if(typeof values !== undefined && values !== null){
-          setFormValues(Object.assign({},formValues,JSON.parse(values)))
+          setFormValues(Object.assign({},defaultFormValues,JSON.parse(values)))
         }
       }
     })
+
+
     const handleSubmit = (values)=>{
       authenticate(values).then(
         result=>{

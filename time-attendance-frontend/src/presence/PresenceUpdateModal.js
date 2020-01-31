@@ -3,7 +3,8 @@ import React from 'react';
 import PinPad from './PinPad';
 import './PresenceUpdateModal.css';
 
-import Pin from '../components/Pin'
+import {UserToggleString,UserPic} from 'main/User'
+
 export default function PresenceUpdateModal(props) {
 
     const { visible, handleClose, user } = props;
@@ -29,10 +30,13 @@ export default function PresenceUpdateModal(props) {
             width="fit-content"
             className="presence-update-modal"
         >
-          <p>
-              Saisissez votre code PIN pour pointer à {present ? 'la' : "l'"}{<b>{present ? 'SORTIE' : 'ENTRÉE'}</b>}
+          <p style={{textAlign:"center"}}>
+            <UserPic user={user}/>
           </p>
-          <Pin user={user}/>
+          <p>
+              Saisissez votre code PIN pour pointer à <UserToggleString user={user}/>
+          </p>
+          <PinPad user={user}/>
         </Modal>
     )
 }

@@ -25,6 +25,20 @@ export const UserPresence =  (props) => {
 }
 
 
+export const UserToggleString =  (props) => {
+  const {user} = props;
+  const {attendance_state} = user;
+  const present = attendance_state ==='checked_in'
+  return (
+    <React.Fragment>
+      {present ? 'la ' : "l'"}{<b>{present ? 'SORTIE' : 'ENTRÉE'}</b>}
+    </React.Fragment>
+
+  )
+
+
+}
+
 export const User = (props)  => {
     const {user} = props
 
