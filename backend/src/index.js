@@ -109,7 +109,7 @@ Router.post('/attendances/:user_id/check_in',authenticateMW,(req,{reply,reply_er
   const {user_id} = req.params;
   const {pin} = req.body;
   odoo.check_in(user_id,pin)
-  .then(result => reply({success:true,id:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 
@@ -131,7 +131,7 @@ Router.post('/toggle/:user_id',authenticateMW,(req,{reply,reply_error})=>{
   const {pin} = req.body;
 
   odoo.toggle_check_status(user_id,pin)
-  .then(result => reply({success:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 
@@ -142,7 +142,7 @@ Router.post('/atttendances/:user_id/check_out',authenticateMW,(req,{reply,reply_
   const {pin} = req.body;
 
   odoo.check_out(user_id,pin)
-  .then(result => reply({success:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 

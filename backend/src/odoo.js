@@ -57,7 +57,14 @@ const check_in = odoo=> (user_id,pin)=>{
       throw new APIError('User is already checked out',666)
 
     return create_attendance(odoo)(user_id)
-  })
+  }).then(response=> {
+    return {
+      action:'check_in',
+      user_id
+    }
+  }
+
+  )
 }
 
 
@@ -78,6 +85,11 @@ const check_out = odoo => (user_id,pin)=>{
 
     const {id} = reply[0];
     return update_attendance(odoo)(id)
+  }).then(response=>{
+    return {
+      action:'check_out',
+      user_id
+    }
   });
 }
 
