@@ -1,16 +1,20 @@
 import React,{useState,useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import {toggle} from '../redux/Users/actions'
+import {toggle as toggleActionCreator} from '../redux/Users/actions'
 
-export default (user_id,pinSize=4,initialPin='') => {
+
+
+export default (user_id,pinSize=4,initialPin='',onPinEntered) => {
 
   const [error, setError] = useState();
   const [pin, setPin] = useState('');
+  const dispatch = useDispatch()
 
   const handleTypeKey = (key) =>{
     if( pin.length < pinSize || key === 'C') {
       const _pin = key === "C" ? pin.slice(0, -1) : pin + key
       setPin(_pin);
+      (onPinEntered && _pin.length === pinSize) && onPinEntered(_pin,exp)
     }
   }
 
@@ -18,11 +22,18 @@ export default (user_id,pinSize=4,initialPin='') => {
     setPin('')
   }
 
-  return {
+  const toggle = ()=>{
+    dispatch(toggleActionCreator(user_id))
+  }
+
+
+
+  const exp=  {
     pin,
     setPin,
     error,
     reset,
-    handleTypeKey
+    handleTypeKey,
   }
+  return exp
 }

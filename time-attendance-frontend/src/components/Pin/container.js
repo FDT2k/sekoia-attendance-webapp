@@ -31,6 +31,7 @@ export default (Composed) =>{
     return (
       <React.Fragment>
         <Composed
+          user={user}
           pinSize={pinSize || 4}
           callback={handlePin}
           error={error}

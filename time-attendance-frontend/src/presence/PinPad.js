@@ -4,11 +4,22 @@ import PinDisplay from './PinDisplay';
 
 import usePin from './pinHook'
 
+
+import { useDispatch } from 'react-redux'
+import {toggle as toggleActionCreator} from '../redux/Users/actions'
+
+
 export default function PinPad(props) {
 
-    const { pinSize  } = props;
+    const { pinSize , user  } = props;
 
-    const { pin,  error,  reset,  handleTypeKey } = usePin(2,pinSize,'')
+
+    const dispatch = useDispatch();
+
+    const { pin,  error,  reset,  handleTypeKey} = usePin(user.id,pinSize,'',
+        (pin) => dispatch(toggleActionCreator(user.id,pin) ) )
+
+
 
     return (
         <div
