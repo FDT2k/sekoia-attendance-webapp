@@ -23,11 +23,11 @@ export const authenticate = (payload)=> {
 }
 
 
-export const check_token = ()=>{
+export const check_token = (token)=>{
     return async (dispatch,getState)=>{
-      const token = localStorage.getItem('token');
-      if(token){
-        return dispatch(resolveAsyncAuthAction( makeAPI(getState().auth.config.api_url,token).authenticated() ))
+      const _token = token ||  localStorage.getItem('token');
+      if(_token){
+        return dispatch(resolveAsyncAuthAction( makeAPI(getState().auth.config.api_url,_token).authenticated() ))
       }else{
         dispatch(authenticate_failure(new Error('no token found')))
       }
