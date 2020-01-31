@@ -1,10 +1,8 @@
 import {compose} from 'redux'
 import Component from './component';
-import Container from './container';
-import connect from './connect';
+import Container from './redux';
 
 const enhance = compose(
-	connect,
   Container,
 )
 
