@@ -13,7 +13,6 @@ export default function PinPad(props) {
 
     const { pinSize , user  } = props;
 
-
     const dispatch = useDispatch();
 
     //dispatch the redux action when the pin has been entered
@@ -22,7 +21,7 @@ export default function PinPad(props) {
 
     // use the pinHook.
     const { pin,  error,  reset,  handleTypeKey} = usePin(user.id,pinSize,'', pinEnteredHandler)
-    
+
 
 
     return (
@@ -36,7 +35,6 @@ export default function PinPad(props) {
             {error  && <h1>{error}</h1>}
             <PinDisplay max={pinSize} actives={pin.length} />
             <KeyPad handleClick={handleTypeKey}/>
-
         </div>
     )
 }
