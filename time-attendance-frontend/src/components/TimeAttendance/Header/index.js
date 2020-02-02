@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PageHeader } from 'antd';
-import Clock from './Clock';
+import Clock from 'components/Widgets/Clock';
 import './Header.css';
 
 export class Header extends Component {

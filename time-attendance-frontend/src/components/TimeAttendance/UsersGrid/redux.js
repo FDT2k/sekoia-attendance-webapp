@@ -7,11 +7,11 @@ Links the User grid to the redux store
 import React, {useState, useEffect }  from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
 
-import Error                          from '../../components/Error'
+import Error                          from 'components/Error'
 
-import { get_users }                  from '../../redux/Users/actions'
-import { check_token }                from '../../redux/Auth/actions'
-import { userListSelector }           from '../../redux/selectors'
+import { get_users }                  from 'redux/Users/actions'
+import { check_token }                from 'redux/Auth/actions'
+import { userListSelector }           from 'redux/selectors'
 
 export default (Composed) => {
   return (props) => {
@@ -26,15 +26,17 @@ export default (Composed) => {
     useEffect(()=>{ // fetch the user list
       setLoading(true)
       dispatch(check_token()).then(token=>{
-        dispatch(get_users()).then(result=>{
-          setLoading(false)
-        }).catch(
-          res=>{
+        return dispatch(get_users())
+      })
+     .then(result=>{
+        setLoading(false)
+      })
+     .catch(res=>{
             setLoading(false)
             setError(res)
           }
-        )
-      })
+      )
+
     },[shouldReload])
 
     return (

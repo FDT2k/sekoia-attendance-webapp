@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Col, Row } from 'antd';
-import PresenceWindow from '../../presence/PresenceWindow';
-import User from '../User';
+import PresenceWindow from 'components/TimeAttendance/PresenceWindow';
+import User from 'components/TimeAttendance/UserGrid/User';
 import './style.css';
 
 

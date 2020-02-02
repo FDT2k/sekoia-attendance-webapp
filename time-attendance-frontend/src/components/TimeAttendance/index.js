@@ -1,9 +1,9 @@
 import React                            from 'react';
 import { Layout }                       from 'antd';
 
-import Header                           from 'main/Header';
-import UsersGrid                        from 'main/UsersGrid';
-import ConnectBox                       from '../ConnectBox';
+import Header                           from 'components/TimeAttendance/Header';
+import UsersGrid                        from 'components/TimeAttendance/UsersGrid';
+import ConnectBox                       from 'components/TimeAttendance/ConnectBox';
 
 import {check_token,load_stored_config} from 'redux/Auth/actions'
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as CircleSvg } from '../resources/circle.svg';
+import { ReactComponent as CircleSvg } from 'resources/circle.svg';
 import './PinDisplay.css';
 
 export default function PinDisplay(props) {

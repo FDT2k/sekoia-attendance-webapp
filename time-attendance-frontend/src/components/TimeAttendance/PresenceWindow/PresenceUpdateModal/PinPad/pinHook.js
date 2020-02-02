@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import {toggle as toggleActionCreator} from '../redux/Users/actions'
+import {toggle as toggleActionCreator} from 'redux/Users/actions'
 
 
 /*
@@ -8,7 +8,7 @@ import {toggle as toggleActionCreator} from '../redux/Users/actions'
 handle a pin (or password) state and automatically call a callback when the required length is met
 */
 
-export default (user_id,pinSize=4,initialPin='',onPinEntered) => {
+export default (user_id,pinSize=4, initialPin='', onPinEntered) => {
 
 
   const [error, setError] = useState();

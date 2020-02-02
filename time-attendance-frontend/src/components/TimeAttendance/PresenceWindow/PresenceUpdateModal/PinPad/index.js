@@ -1,12 +1,13 @@
 import React      from 'react';
+import { useDispatch } from 'react-redux'
+
+
 import KeyPad     from './KeyPad';
 import PinDisplay from './PinDisplay';
-
 import usePin from './pinHook'
 
+import {toggle as toggleActionCreator} from 'redux/Users/actions'
 
-import { useDispatch } from 'react-redux'
-import {toggle as toggleActionCreator} from '../redux/Users/actions'
 
 
 export default function PinPad(props) {
