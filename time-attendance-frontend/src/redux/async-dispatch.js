@@ -57,7 +57,7 @@ export const axiosErrorPayloadResolver = (payload) => {
     response = payload
   }
 
-  return Promise.reject(response)
+  return Promise.reject(response) // we need to reject here !!
 }
 
 

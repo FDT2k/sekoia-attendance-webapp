@@ -3,7 +3,7 @@ import React from 'react';
 import PinPad from './PinPad';
 import './PresenceUpdateModal.css';
 
-import {UserToggleString,UserPic} from 'main/User'
+import {UserToggleString,UserPic} from 'components/TimeAttendance/UsersGrid/User'
 
 export default function PresenceUpdateModal(props) {
 
