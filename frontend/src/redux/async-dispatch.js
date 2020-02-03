@@ -46,7 +46,6 @@ export const axiosPayloadResolver = payload => {
 
 export const axiosErrorPayloadResolver = (payload) => {
   let response = null
-  debugger;
   if(payload.response && payload.response.data){
     const {error} = payload.response.data
     const {name,message,code}  = error;
