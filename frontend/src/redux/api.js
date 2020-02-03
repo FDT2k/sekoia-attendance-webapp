@@ -11,7 +11,7 @@ export const _authenticated=  axios  => _ =>  axios.get('/authenticate',{})
 
 export const _get_users =  axios  => () =>  axios.get('/users',{})
 
-export const _get_attendance =  axios  =>  user_id =>  axios.get(`/users/${user_id}`,{})
+export const _get_attendance =  axios  =>  user_id =>  axios.get(`/attendances/${user_id}`,{})
 
 export const _toggle =  axios  =>  (user_id,pin) =>  axios.post(`/toggle/${user_id}`,{pin})
 
