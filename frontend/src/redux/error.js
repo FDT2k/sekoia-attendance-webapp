@@ -4,6 +4,6 @@ export default class APIError extends Error {
        super(message);
        this.name = this.constructor.name;
        this.message = message;
-       this.error_code = code;
+       this.code = code;
    }
 }
