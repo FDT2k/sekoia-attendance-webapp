@@ -1,19 +1,23 @@
-const express = require('express');
-const app = express();
-const Router = express.Router();
-const jwt = require('jsonwebtoken');
-const uuid = require('uuid/v4')
-const jwt_secret = uuid();
-const bodyParser = require('body-parser')
-const { validate } = require ('parameter-validator');
-const _ = require('lodash')
-const {serializeError, deserializeError} = require('serialize-error');
-const { ODOO } = require('./odoo')
+const express                 = require('express');
+const jwt                     = require('jsonwebtoken');
+const uuid                    = require('uuid/v4')
+const bodyParser              = require('body-parser')
+const { validate }            = require ('parameter-validator');
+const _                       = require('lodash')
+const cors                    = require('cors')
+const {serializeError}        = require('serialize-error');
+const { ODOO }                = require('./odoo')
+const {APIError}              = require('./error')
 
-const {APIError} = require('./error')
+
+
+
+const app          = express();
+const Router       = express.Router();
+const jwt_secret   = uuid();
+
 
 let sessions = {}
-
 
 const format_error = error => {
   const _err = serializeError(error)
@@ -47,6 +51,7 @@ const authenticateMW = (req,{reply_error},next)=>{
       if(sessions[tok]){
         // on initialize la factory avec le contenu de la session
         req.odoo = ODOO(sessions[tok])
+        req.token = tok;
         return next();
       }else{
         throw new APIError('Session not found')
@@ -75,6 +80,15 @@ Router.post('/authenticate',(req,{reply,reply_error})=>{
   }
 })
 
+Router.get('/authenticate',authenticateMW,(req,{reply,reply_error})=>{
+  let token =jwt.sign({ foo: 'bar' }, jwt_secret);
+  try {
+    reply({token:req.token})
+  }catch(error){
+    reply_error(error)
+  }
+})
+
 
 
 Router.get('/users',authenticateMW,(req,{reply,reply_error})=>{
@@ -95,7 +109,7 @@ Router.post('/attendances/:user_id/check_in',authenticateMW,(req,{reply,reply_er
   const {user_id} = req.params;
   const {pin} = req.body;
   odoo.check_in(user_id,pin)
-  .then(result => reply({success:true,id:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 
@@ -117,7 +131,7 @@ Router.post('/toggle/:user_id',authenticateMW,(req,{reply,reply_error})=>{
   const {pin} = req.body;
 
   odoo.toggle_check_status(user_id,pin)
-  .then(result => reply({success:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 
@@ -128,10 +142,11 @@ Router.post('/atttendances/:user_id/check_out',authenticateMW,(req,{reply,reply_
   const {pin} = req.body;
 
   odoo.check_out(user_id,pin)
-  .then(result => reply({success:result}))
+  .then(result => reply({success:true,...result}))
   .catch(reply_error)
 })
 
+app.use(cors())
 
 app.use(bodyParser.json())
 app.use(bindReplyAndError);

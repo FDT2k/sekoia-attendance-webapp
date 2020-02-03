@@ -3,6 +3,8 @@ import React from 'react';
 import PinPad from './PinPad';
 import './PresenceUpdateModal.css';
 
+import {UserToggleString,UserPic} from 'components/TimeAttendance/UsersGrid/User'
+
 export default function PresenceUpdateModal(props) {
 
     const { visible, handleClose, user } = props;
@@ -13,9 +15,9 @@ export default function PresenceUpdateModal(props) {
 
 
     // TODO afficher l'avatar
-    const { id, firstname, lastname, picture, present } = user;
+    const { id, name, picture, present } = user;
 
-    const title = `Bienvenue ${firstname} ${lastname}`;
+    const title = `Bienvenue ${name}`;
 
     return (
         <Modal
@@ -28,10 +30,13 @@ export default function PresenceUpdateModal(props) {
             width="fit-content"
             className="presence-update-modal"
         >
-            <p>
-                Saisissez votre code PIN pour pointer à {present ? 'la' : "l'"}{<b>{present ? 'SORTIE' : 'ENTRÉE'}</b>}
-            </p>
-            <PinPad pinSize={4} />
+          <p style={{textAlign:"center"}}>
+            <UserPic user={user}/>
+          </p>
+          <p>
+              Saisissez votre code PIN pour pointer à <UserToggleString user={user}/>
+          </p>
+          <PinPad user={user}/>
         </Modal>
     )
 }
