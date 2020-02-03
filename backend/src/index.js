@@ -58,6 +58,15 @@ const authenticateMW = (req,{reply_error},next)=>{
       }
     }
   }catch(err){
+    if(err.name == 'JsonWebTokenError'){
+      err.code = 401;
+    }
+
+    if(!err.code){
+      err.code = 500;
+    }
+
+    
     reply_error(err,401)
 
   }

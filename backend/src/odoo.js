@@ -48,10 +48,10 @@ const check_in = odoo=> (user_id,pin)=>{
   return get_user(odoo)(user_id)
   .then (user => {
     if(user.length!=1)
-      throw new APIError('unkown user id');
+      throw new APIError('unkown user id',401);
 
     if (user[0].pin != pin)
-      throw new APIError('invalid pin')
+      throw new APIError('invalid pin',401)
 
     if (user[0].attendance_state == 'checked_in')
       throw new APIError('User is already checked out',666)
@@ -72,9 +72,9 @@ const check_out = odoo => (user_id,pin)=>{
   return get_user(odoo)(user_id)
   .then (user => {
     if(user.length!=1)
-      throw new APIError('unkown user id');
+      throw new APIError('unkown user id',404);
     if (user[0].pin != pin)
-      throw new APIError('invalid pin')
+      throw new APIError('invalid pin',401)
 
     if (user[0].attendance_state == 'checked_out')
       throw new APIError('User is already checked out',666)

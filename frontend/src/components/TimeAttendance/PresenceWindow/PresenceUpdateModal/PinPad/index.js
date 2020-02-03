@@ -18,7 +18,15 @@ export default function PinPad(props) {
 
     //dispatch the redux action when the pin has been entered
     // REDUX is responsible to update the user state and refresh all the views
-    const pinEnteredHandler =     (pin) => dispatch(  toggleActionCreator(user.id,pin) )
+    const pinEnteredHandler =     (pin) => dispatch(
+      toggleActionCreator(user.id,pin)
+    ).catch(error=>{
+
+      console.error(error)
+    }).then(result=>{
+
+
+    })
 
     // use the pinHook.
     const { pin,  error,  reset,  handleTypeKey} = usePin(user.id,pinSize,'', pinEnteredHandler)
