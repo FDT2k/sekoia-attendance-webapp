@@ -8,7 +8,7 @@ import React, {useState, useEffect }  from 'react';
 import { useDispatch, useSelector }   from 'react-redux';
 
 import Error                          from 'components/Error'
-
+import {Alert}                        from 'antd';
 import { get_users }                  from 'redux/Users/actions'
 import { check_token }                from 'redux/Auth/actions'
 import { userListSelector }           from 'redux/selectors'
@@ -20,6 +20,8 @@ export default (Composed) => {
     const [error,setError]        = useState();
 
     const users                   = useSelector(userListSelector) // check out redux selectors
+
+    const isAuthenticated         = useSelector(state=> state.auth ? state.auth.authenticated: false)
 
     const dispatch                = useDispatch();
 
@@ -47,6 +49,8 @@ export default (Composed) => {
         { !isLoading  && !error && <Composed users={users} />  /* Load the component if everything is fine */}
 
         { !isLoading && error && <Error error={error}/> /* display an error if needed */}
+
+        { !isAuthenticated &&  <div className="ant-alert ant-alert-warning ant-alert-no-icon">Le client n'est pas configuré. <a href="/configure">Cliquez ici pour configurer</a></div>}
 
       </React.Fragment>
     );

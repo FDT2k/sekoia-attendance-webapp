@@ -6,7 +6,7 @@ import KeyPad     from './KeyPad';
 import PinDisplay from './PinDisplay';
 import usePin from './pinHook'
 
-import {toggle as toggleActionCreator} from 'redux/Users/actions'
+import {toggle as toggleActionCreator,get_attendance} from 'redux/Users/actions'
 
 
 
@@ -20,12 +20,8 @@ export default function PinPad(props) {
     // REDUX is responsible to update the user state and refresh all the views
     const pinEnteredHandler =     (pin) => dispatch(
       toggleActionCreator(user.id,pin)
-    ).catch(error=>{
-
-      console.error(error)
-    }).then(result=>{
-
-
+    ).then(res=>{
+      return dispatch(get_attendance(user.id))
     })
 
     // use the pinHook.
