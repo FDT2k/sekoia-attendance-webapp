@@ -16,7 +16,10 @@ const replaceUser = (user_id,users,fn)=>{
 }
 
 
-export default (state={list:[]},action)=>{
+const update_user_status = (user,new_status)=> ({...user, attendance_state:new_status})
+
+
+export default (state={list:[],byIds:{},attendances:{}},action)=>{
 
 
   switch(action.type){
@@ -26,15 +29,20 @@ export default (state={list:[]},action)=>{
         byIds: action.payload.reduce((acc,value)=>{
             acc[value.id]=value
             return acc;
-        },{})
+        },{}),
+        attendances:{}
 
       }
 
     case TOGGLE_USER:
 
       return {
-        list: replaceUser(action.payload.user_id,state.list,user=>({...user, attendance_state:action.payload.action})),
-        byIds: {...state.byIds,[parseInt(action.payload.user_id)]:{...state.byIds[action.payload.user_id], attendance_state:action.payload.action}}
+        ...state,
+        list: replaceUser(action.payload.user_id,state.list,user=>( update_user_status(user,action.payload.action)  )),
+        byIds: {...state.byIds,[parseInt(action.payload.user_id)]:{
+          ...update_user_status(state.byIds[action.payload.user_id] ,action.payload.action)
+        }},
+
       }
     break;
     case FETCH_ATTENDANCE:
