@@ -39,7 +39,6 @@ export default (Composed) =>{
     const [error, setError]                   = useState(null);
 
     useEffect(()=>{
-      debugger;
       if (Object.keys(formValues).length===0){
         let values = getConfig();
         if(typeof values !== undefined && values !== null){
