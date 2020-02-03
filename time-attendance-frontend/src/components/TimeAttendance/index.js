@@ -6,12 +6,13 @@ import UsersGrid                        from 'components/TimeAttendance/UsersGri
 import ConnectBox                       from 'components/TimeAttendance/ConnectBox';
 
 import {check_token,load_stored_config} from 'redux/Auth/actions'
+import { Route }                        from "wouter"; // routeur
 
 export default props => {
 
   return  (
     <React.Fragment>
-
+        <Route path="/">
         <Layout className="App">
           <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%', background: 'none' }}>
             <Header />
@@ -20,8 +21,10 @@ export default props => {
             <UsersGrid/>
           </Layout.Content>
         </Layout>
-
-        <ConnectBox/>
+        </Route>
+        <Route path="/configure">
+          <ConnectBox/>
+        </Route>
 
     </React.Fragment>
   )

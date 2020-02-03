@@ -1,5 +1,4 @@
 import React                            from 'react';
-import { Route }                        from "wouter"; // routeur
 
 import {Provider}                       from 'react-redux'
 import store                            from './redux'
