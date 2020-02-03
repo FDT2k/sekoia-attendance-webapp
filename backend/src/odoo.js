@@ -59,7 +59,7 @@ const check_in = odoo=> (user_id,pin)=>{
     return create_attendance(odoo)(user_id)
   }).then(response=> {
     return {
-      action:'check_in',
+      action:'checked_in',
       user_id
     }
   }
@@ -87,7 +87,7 @@ const check_out = odoo => (user_id,pin)=>{
     return update_attendance(odoo)(id)
   }).then(response=>{
     return {
-      action:'check_out',
+      action:'checked_out',
       user_id
     }
   });

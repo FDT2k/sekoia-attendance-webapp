@@ -48,9 +48,12 @@ export const axiosErrorPayloadResolver = (payload) => {
   let response = null
   if(payload.response && payload.response.data){
     const {error} = payload.response.data
-    const {name,message,code}  = error;
-
-    response = new APIError(message,code);
+    if(error){
+      const {name,message,code}  = error;
+      response = new APIError(message,code);
+    }else{
+      response = new Error(payload)
+    }
 
   }else{
 

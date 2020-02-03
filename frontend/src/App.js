@@ -11,7 +11,7 @@ import 'App.css';
 
 // initialize some stuff in the store from localstorage (could be replaced by a redux-persist store but it's crap)
 store.dispatch(load_stored_config())
-store.dispatch(check_token())
+store.dispatch(check_token()).catch(console.error)
 
 
 function App() {
