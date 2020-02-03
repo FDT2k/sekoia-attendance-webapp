@@ -19,7 +19,7 @@ export const _toggle =  axios  =>  (user_id,pin) =>  axios.post(`/toggle/${user_
 export const makeAPI = (url,token) => {
   const instance = _axios.create({
     baseURL: url,
-    timeout: 1000,
+    timeout: 10000,
     headers: {'x-api-auth': token}
   });
 
