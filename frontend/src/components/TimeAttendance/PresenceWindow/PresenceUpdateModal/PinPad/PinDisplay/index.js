@@ -2,6 +2,9 @@ import React from 'react';
 import { ReactComponent as CircleSvg } from 'resources/circle.svg';
 import './PinDisplay.css';
 
+/**
+ * Affiche l'avancement de saisie du PIN (nombre de chiffres saisis / taille maximale)
+ */
 export default function PinDisplay(props) {
 
     const { max = 4, actives } = props;
