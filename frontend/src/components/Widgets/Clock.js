@@ -14,7 +14,7 @@ export function useClock(interval = 1000) {
 export default function Clock() {
 
     return (
-        <div>
+        <div style={{margin:0,padding:0,display:'inline-block',fontSize:'30px',lineHeight:0}}>
             <p>{useClock().toLocaleTimeString('ch-CH', { hour: '2-digit', minute: '2-digit' })}</p>
         </div>
     )
