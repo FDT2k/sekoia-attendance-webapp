@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import { Drawer } from 'antd';
 
 import {useDispatch,useSelector} from 'react-redux';
@@ -15,19 +15,25 @@ export const PresenceLine = ({check_in,check_out,date})=>{
 export default (props) => {
 
     const dispatch = useDispatch();
-/*
 
-    const load_data = () => dispatch(get_attendance(props.user.id)).catch(console.error)
 
-    const get_user_attendances =
+    const load_data = (uid) => dispatch(get_attendance(uid)).catch(console.error)
+
+  //  const [user_id,setUserId] = useState(props.user? props.user.id: undefined)
+
+    const [loadedUser, setLoaded] = useState();
+
+    const attendance_list = useSelector(state=>{
+      if(props.user && props.user.id){
+        return state.users.attendances[props.user.id] || []
+      }
+      return []
+    })
 
     useEffect(()=>{
-      if(props.user && props.user.id ){
-        load_data()
-        const attenedances = useSelector(makeAttendanceSelector(props.user.id))
-      }
-    })
-*/
+        load_data(props.user.id);
+        setLoaded(props.user.id)
+    },[])
 
     return (
         <Drawer
@@ -37,11 +43,15 @@ export default (props) => {
             onClose={props.handleClose}
             visible={props.visible}
         >
+        {
+          attendance_list.map(
+            item => <li key={item.id}>{item.check_in} - {item.check_out}</li>
+
+          )
+
+        }
 
 
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
         </Drawer>
     )
 }

@@ -19,11 +19,11 @@ export default ({users}) => {
 
   return (
     <Fragment>
-      <PresenceWindow
+      {selectedUser && <PresenceWindow
         visible={isModalVisible}
         handleClose={handleClose}
         user={selectedUser}
-      />
+      /> }
       <Row type="flex">
         {users && users.length >0 && users.map(user => (
           <Col key={user.id} >
