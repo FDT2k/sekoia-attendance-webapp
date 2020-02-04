@@ -27,22 +27,13 @@ export default (props) => {
       if(props.user && props.user.id){
         return state.users.attendances[props.user.id] || []
       }
-
       return []
-
     })
-
-
 
     useEffect(()=>{
-      if( props.user  &&  props.user.id && props.user.id != loadedUser){
-      //  console.error('AAAAAAAAAAAAAAH',props.user.id)
-      //  load_data(props.user.id)
         load_data(props.user.id);
         setLoaded(props.user.id)
-
-      }
-    })
+    },[])
 
     return (
         <Drawer
