@@ -2,6 +2,9 @@ import { Button, Col, Row } from 'antd';
 import React from 'react';
 import './KeyPad.css';
 
+/**
+ * A simple keypad who return the clicked value.
+ */
 export default function KeyPad(props) {
 
     const createLine = (...values) => (
