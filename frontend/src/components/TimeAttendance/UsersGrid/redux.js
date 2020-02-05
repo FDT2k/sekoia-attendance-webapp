@@ -41,7 +41,7 @@ export default (Composed) => {
           }
       )
 
-    },[shouldReload])
+    },[])
 
     return (
       <React.Fragment>

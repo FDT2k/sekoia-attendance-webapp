@@ -16,12 +16,12 @@ export default ({ users }) => {
     <Fragment>
       {selectedUser && <PresenceWindow
         afterClose={afterClose}
-        user={selectedUser}
+        user={users.find(item => item.id ===selectedUser )}
       />}
       <Row type="flex">
-        {users && users.length > 0 && users.map(user => (
+        {users && users.length > 0 && users.map((user,idx) => (
           <Col key={user.id} >
-            <User user={user} onClick={() => showModal(user)} />
+            <User user={user} onClick={() => showModal(user.id)} />
           </Col>
         ))}
       </Row>

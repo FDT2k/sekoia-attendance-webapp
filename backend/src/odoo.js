@@ -51,7 +51,7 @@ const check_in = odoo=> (user_id,pin)=>{
       throw new APIError('unkown user id',401);
 
     if (user[0].pin != pin)
-      throw new APIError('invalid pin',401)
+      throw new APIError('Code pin invalide',401)
 
     if (user[0].attendance_state == 'checked_in')
       throw new APIError('User is already checked out',666)
