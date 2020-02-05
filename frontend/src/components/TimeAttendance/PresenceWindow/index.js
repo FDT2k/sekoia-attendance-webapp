@@ -1,12 +1,17 @@
-import React, { Fragment } from 'react'
-import PresenceUpdateModal from './PresenceUpdateModal'
-import LastPresences from './LastPresences'
+import React, { Fragment, useState } from 'react';
+import LastPresences from './LastPresences';
+import PresenceUpdateModal from './PresenceUpdateModal';
 
 export default function PresenceWindow(props) {
+
+    const [visible, setVisible] = useState(true)
+
+    const handleClose = e => setVisible(false);
+
     return (
         <Fragment>
-            <LastPresences {...props} />
-            <PresenceUpdateModal  {...props} />
+            <LastPresences visible={visible} {...props} />
+            <PresenceUpdateModal visible={visible} handleClose={handleClose} {...props} />
         </Fragment>
     )
 }

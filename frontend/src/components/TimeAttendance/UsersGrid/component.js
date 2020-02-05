@@ -1,31 +1,25 @@
-import React, { useState, Fragment } from 'react';
 import { Col, Row } from 'antd';
 import PresenceWindow from 'components/TimeAttendance/PresenceWindow';
 import User from 'components/TimeAttendance/UsersGrid/User';
+import React, { Fragment, useState } from 'react';
 import './style.css';
 
 
-export default ({users}) => {
+export default ({ users }) => {
 
-  const [ isModalVisible, setModalVisible ] = useState(false)
-  const [ selectedUser, selectUser ] = useState(null)
+  const [selectedUser, selectUser] = useState(null)
 
-  const handleClose = e => setModalVisible(false)
-
-  const showModal = user => {
-    selectUser(user);
-    setModalVisible(true);
-  }
+  const showModal = user => selectUser(user);
+  const afterClose = e => selectUser(null);
 
   return (
     <Fragment>
       {selectedUser && <PresenceWindow
-        visible={isModalVisible}
-        handleClose={handleClose}
+        afterClose={afterClose}
         user={selectedUser}
-      /> }
+      />}
       <Row type="flex">
-        {users && users.length >0 && users.map(user => (
+        {users && users.length > 0 && users.map(user => (
           <Col key={user.id} >
             <User user={user} onClick={() => showModal(user)} />
           </Col>
