@@ -1,4 +1,4 @@
-import React                            from 'react';
+import React , {useState}                           from 'react';
 import { Layout }                       from 'antd';
 
 import Header                           from 'components/TimeAttendance/Header';
@@ -9,16 +9,19 @@ import {check_token,load_stored_config} from 'redux/Auth/actions'
 import { Route }                        from "wouter"; // routeur
 
 export default props => {
+  const [filtered,setFiltered] = useState(false)
+
+  const toggleState = _=>{
+    setFiltered(!filtered)
+  }
 
   return  (
     <React.Fragment>
         <Route path="/">
         <Layout className="App">
-          <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%', background: 'none' }}>
-            <Header />
-          </Layout.Header>
-          <Layout.Content style={{ padding: '0 50px', marginTop: 64 }}>
-            <UsersGrid/>
+            <Header handleVisibility={toggleState}/>
+          <Layout.Content style={{ padding: '0 50px', marginTop: 64}}>
+            <UsersGrid displayOnlyPresents={filtered}/>
           </Layout.Content>
         </Layout>
         </Route>

@@ -11,15 +11,17 @@ import Error                          from 'components/Error'
 import {Alert}                        from 'antd';
 import { get_users }                  from 'redux/Users/actions'
 import { check_token }                from 'redux/Auth/actions'
-import { userListSelector }           from 'redux/selectors'
+import { userListSelector,makeFilteredUserSelector }           from 'redux/selectors'
 
 export default (Composed) => {
   return (props) => {
+
+
     const [isLoading,setLoading]  = useState(false); // loading status
     const [shouldReload,reload]   = useState(false); // never changes but it force useeffect to not fire at everystate change (I need to think about this)
     const [error,setError]        = useState();
-
-    const users                   = useSelector(userListSelector) // check out redux selectors
+    const displayOnlyPresents     = props.displayOnlyPresents || false
+    const users                   = useSelector(makeFilteredUserSelector(displayOnlyPresents)) // check out redux selectors
 
     const isAuthenticated         = useSelector(state=> state.auth ? state.auth.authenticated: false)
 
