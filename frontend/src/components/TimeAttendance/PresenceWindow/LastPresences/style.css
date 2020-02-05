@@ -1,0 +1,12 @@
+.timeanomaly{
+  color:red;
+}
+
+.presences{
+  padding: 0px;
+  
+}
+
+.presences li{
+  list-style-type: none;
+}
