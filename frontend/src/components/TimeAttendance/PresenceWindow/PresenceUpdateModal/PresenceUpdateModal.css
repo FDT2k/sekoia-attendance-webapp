@@ -1,7 +1,13 @@
-.presence-update-modal {
-
+.presence-update-modal p {
+  max-width: fit-content;
+  text-align: center;
 }
 
+.presence-update-modal img {
+  display: block;
+  margin: auto;
+  margin-bottom: 1em;
+}
 
 .confirm {
   text-align:center;

@@ -74,6 +74,7 @@ export default function PresenceUpdateModal(props) {
             title={success ? successTitle : title}
             visible={visible}
             onCancel={handleClose}
+            centered={true}
             mask={false}
             maskClosable={false}
             footer={null}
@@ -82,9 +83,7 @@ export default function PresenceUpdateModal(props) {
             afterClose={props.afterClose} // need to reset success state
         >
 
-            <p style={{ textAlign: "center" }}>
-                <UserPic user={user} />
-            </p>
+            <UserPic user={user} />
 
             {!success && pinContent}
             {success && checked_in && successInContent}

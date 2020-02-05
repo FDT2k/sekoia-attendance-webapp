@@ -1,6 +1,6 @@
 .pin-display {
     display: flex;
-    height: 80px;
+    padding-bottom: 1rem;
     fill: rgba(0, 0, 0, 0.65);
 }
 
@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     font-size: 5px;
+    height: 3rem;
 }
 
 .pin-display .active {
