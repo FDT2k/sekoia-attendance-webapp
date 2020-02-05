@@ -1,6 +1,6 @@
 import { message, Modal } from 'antd';
 import { UserPic, UserToggleString } from 'components/TimeAttendance/UsersGrid/User';
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { get_attendance, toggle as toggleActionCreator } from 'redux/Users/actions';
 import usePin from './pinHook';
@@ -64,14 +64,13 @@ export default function PresenceUpdateModal(props) {
             footer={null}
             width="fit-content"
             className="presence-update-modal"
-            destroyOnClose={true}
-            afterClose={() => setSuccess(false)} // need to reset success state
+            afterClose={props.afterClose} // need to reset success state
         >
             <p style={{ textAlign: "center" }}>
                 <UserPic user={user} />
             </p>
 
-            {success ? successContent : pinContent }
+            {success ? successContent : pinContent}
         </Modal>
     )
 }
