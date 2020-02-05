@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+
+import 'moment/locale/fr';
+
 
 export function useClock(interval = 1000) {
     const [date, setDate] = useState(new Date());
@@ -14,8 +18,8 @@ export function useClock(interval = 1000) {
 export default function Clock() {
 
     return (
-        <div style={{margin:0,padding:0,display:'inline-block',fontSize:'30px',lineHeight:0}}>
-            <p>{useClock().toLocaleTimeString('ch-CH', { hour: '2-digit', minute: '2-digit' })}</p>
+        <div style={{margin:0,padding:0,display:'inline-block',fontSize:'30px',lineHeight:'100%',height:'100%', fontWeight:'bold'}}>
+            {moment(useClock()).format('HH:mm')}
         </div>
     )
 }
