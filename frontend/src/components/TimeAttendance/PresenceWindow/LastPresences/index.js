@@ -6,11 +6,22 @@ import {get_attendance} from 'redux/Users/actions'
 import {makeAttendanceSelector} from 'redux/selectors'
 
 
-export const PresenceLine = ({check_in,check_out,date})=>{
+import FormattedDuration from './FormattedDuration';
+import FormattedInOut from './FormattedInOut';
 
-  return (<li>{check_in} - {check_out || '-'}  - {date}</li>)
+export const PresenceLine = (props)=>{
+  const {line}= props;
+  const {check_in,check_out,worked_hours,id} = line;
+
+
+  return (
+      <li key={id}>
+        <FormattedInOut value={check_in}/>
+        {check_out &&<FormattedInOut value={check_out}/>}
+        {check_out && <FormattedDuration decimalHours={parseFloat(worked_hours)}/>}
+      </li>
+  )
 }
-
 
 export default (props) => {
 
@@ -43,14 +54,14 @@ export default (props) => {
             onClose={props.handleClose}
             visible={props.visible}
         >
+        <ul className="presences">
         {
           attendance_list.map(
-            item => <li key={item.id}>{item.check_in} - {item.check_out}</li>
-
+            item => (<PresenceLine line={item}/>)
           )
 
         }
-
+        </ul>
 
         </Drawer>
     )
