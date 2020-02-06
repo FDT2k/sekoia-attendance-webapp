@@ -25,6 +25,10 @@ Passerelle rest pour le plugins "présence" de Odoo.
 
     npm start
 
+You can change the port of the api by using the LISTEN_PORT env var
+
+    LISTEN_PORT=8080 npm start
+
 
 ## API
 
