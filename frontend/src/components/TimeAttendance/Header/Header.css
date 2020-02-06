@@ -21,6 +21,7 @@ header.header > div.logo > img {
 header.header > div.title {
   flex: 2;
   text-align: center;
+  text-transform: uppercase;
 }
 
 header.header > div.extra {
