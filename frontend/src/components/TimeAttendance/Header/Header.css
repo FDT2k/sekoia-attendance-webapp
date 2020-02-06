@@ -1,3 +1,41 @@
-.header {
-  color:white;
+header.header {
+  /* z-index: 1; */
+  background-color: #0AABB5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  line-height: 1rem;
+  color: white;
+}
+
+header.header > div.logo {
+  flex: 1;
+}
+
+header.header > div.logo > img {
+  height: 1em;
+}
+
+header.header > div.title {
+  flex: 2;
+  text-align: center;
+}
+
+header.header > div.extra {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  font-size: .7em;
+}
+
+header.header > div.extra > button {
+  height: 100%;
+  font-size: 1em;
+  background-color: rgba(0,0,0,0.1);
+  color: white;
+  border: none;
 }

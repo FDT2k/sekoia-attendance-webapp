@@ -18,7 +18,7 @@ export function useClock(interval = 1000) {
 export default function Clock() {
 
     return (
-        <div style={{margin:0,padding:0,display:'inline-block',fontSize:'30px',lineHeight:'100%',height:'100%', fontWeight:'bold'}}>
+        <div className="clock">
             {moment(useClock()).format('HH:mm')}
         </div>
     )
