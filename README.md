@@ -9,4 +9,5 @@ Il est composé d'un frontend en React et d'un backend en react
 
   * [Backend](tree/master/backend)
   * [Frontend](tree/master/frontend)
-  
+
+Il est disponible sous license GPLv3
