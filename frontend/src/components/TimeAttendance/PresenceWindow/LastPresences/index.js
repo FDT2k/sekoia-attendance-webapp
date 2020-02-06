@@ -35,6 +35,7 @@ export default (props) => {
       onClose={props.handleClose}
       visible={props.visible}
       width="25%"
+      style={{ minWidth:"fit-content" }}
     >
       <Timeline mode="alternate">
         {attendance_list.map(item => <PresenceGroup key={item.id} item={item} />)}
