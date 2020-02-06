@@ -1,0 +1,18 @@
+.pin-display {
+    display: flex;
+    padding-bottom: 1rem;
+    fill: rgba(0, 0, 0, 0.65);
+}
+
+.pin-display .pin-icon {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    justify-content: center;
+    font-size: 5px;
+    height: 3rem;
+}
+
+.pin-display .active {
+    font-size: 26px;
+}

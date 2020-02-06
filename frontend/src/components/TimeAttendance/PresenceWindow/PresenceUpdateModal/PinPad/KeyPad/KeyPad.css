@@ -1,0 +1,10 @@
+.key-pad {
+    width: 'fit-content';
+    margin: 'auto';
+}
+
+.key-pad button {
+    height: 4rem;
+    width: 4rem;
+    font-size: x-large;
+}
