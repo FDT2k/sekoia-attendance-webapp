@@ -17,7 +17,9 @@ export default props => {
       <div className="title">Pointage pour la présence</div>
 
       <div className="extra">
-        <Button onTouchStart={handleVisibility} onTouchEnd={handleVisibility} key="showPresents">Afficher <Icon type="user" /></Button>
+        <Button onTouchStart={handleVisibility} onTouchEnd={handleVisibility} key="showPresents">
+          Afficher <Icon type="user" />
+        </Button>
         <Clock key="clock" />
       </div>
     </Layout.Header>

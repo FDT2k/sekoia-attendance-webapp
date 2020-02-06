@@ -40,3 +40,10 @@ header.header > div.extra > button {
   color: white;
   border: none;
 }
+
+header.header > div.extra > button > i {
+  background-color: white;
+  border-radius: 50%;
+  padding: 3px;
+  color: green;
+}
